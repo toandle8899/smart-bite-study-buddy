@@ -52,7 +52,7 @@ const Index = () => {
             {todayContent.map((content) => (
               <ContentCard
                 key={content.id}
-                id={content.id}
+                id={String(content.id)}
                 title={content.title}
                 description={content.description}
                 type={content.type}
@@ -74,7 +74,7 @@ const Index = () => {
             {learningContent.slice(3, 5).map((content) => (
               <ContentCard
                 key={content.id}
-                id={content.id}
+                id={String(content.id)}
                 title={content.title}
                 description={content.description}
                 type={content.type}
