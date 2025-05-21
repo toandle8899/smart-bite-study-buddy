@@ -13,7 +13,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({ children, title }) => {
     <div className="flex flex-col min-h-screen bg-tutor-background">
       <Header title={title} />
       <main className="flex-1 pb-16">
-        <div className="container px-4 py-4 mx-auto max-w-md">
+        <div className="container px-4 py-4 mx-auto max-w-md animate-fade-in">
           {children}
         </div>
       </main>

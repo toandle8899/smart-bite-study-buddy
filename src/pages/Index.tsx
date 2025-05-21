@@ -5,9 +5,18 @@ import ContentCard from "@/components/ui/ContentCard";
 import DailyStreak from "@/components/dashboard/DailyStreak";
 import TodayGoal from "@/components/dashboard/TodayGoal";
 import { learningContent, progressData } from "@/data/mockData";
+import { toast } from "@/hooks/use-toast";
 
 const Index = () => {
   const todayContent = learningContent.slice(0, 3);
+  
+  const handleContentClick = (title: string) => {
+    toast({
+      title: "Content selected",
+      description: `You clicked on ${title}`,
+    });
+    console.log(`Clicked on ${title}`);
+  };
   
   return (
     <PageLayout title="AI Tutor">
@@ -43,12 +52,13 @@ const Index = () => {
             {todayContent.map((content) => (
               <ContentCard
                 key={content.id}
+                id={content.id}
                 title={content.title}
                 description={content.description}
                 type={content.type}
                 progress={content.progress}
                 duration={content.duration}
-                onClick={() => console.log(`Clicked on ${content.title}`)}
+                onClick={() => handleContentClick(content.title)}
               />
             ))}
           </div>
@@ -64,11 +74,12 @@ const Index = () => {
             {learningContent.slice(3, 5).map((content) => (
               <ContentCard
                 key={content.id}
+                id={content.id}
                 title={content.title}
                 description={content.description}
                 type={content.type}
                 duration={content.duration}
-                onClick={() => console.log(`Clicked on ${content.title}`)}
+                onClick={() => handleContentClick(content.title)}
               />
             ))}
           </div>

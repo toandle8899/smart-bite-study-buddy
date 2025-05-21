@@ -2,10 +2,13 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Play, Calendar, MessageSquare, BookOpen } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "@/hooks/use-toast";
 
 export type ContentType = "video" | "flashcard" | "quiz" | "conversation";
 
 interface ContentCardProps {
+  id: string;
   title: string;
   description: string;
   type: ContentType;
@@ -16,6 +19,7 @@ interface ContentCardProps {
 }
 
 const ContentCard: React.FC<ContentCardProps> = ({
+  id,
   title,
   description,
   type,
@@ -24,6 +28,8 @@ const ContentCard: React.FC<ContentCardProps> = ({
   className,
   onClick,
 }) => {
+  const navigate = useNavigate();
+  
   const typeConfig = {
     video: {
       icon: Play,
@@ -49,13 +55,26 @@ const ContentCard: React.FC<ContentCardProps> = ({
 
   const { icon: Icon, bgColor, textColor } = typeConfig[type];
 
+  const handleCardClick = () => {
+    // Use the onClick prop if provided, otherwise navigate to the content page
+    if (onClick) {
+      onClick();
+    } else {
+      toast({
+        title: "Opening content",
+        description: `Loading ${title}...`,
+      });
+      navigate(`/content/${type}/${id}`);
+    }
+  };
+
   return (
     <div
       className={cn(
-        "bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow",
+        "bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow cursor-pointer active:bg-gray-50",
         className
       )}
-      onClick={onClick}
+      onClick={handleCardClick}
     >
       <div className="p-4">
         <div className="flex items-start gap-3">
