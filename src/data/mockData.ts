@@ -1,4 +1,3 @@
-
 import { ContentType } from "@/components/ui/ContentCard";
 
 // Mock learning modules
@@ -12,6 +11,16 @@ export const learningModules = [
     id: 2,
     title: "Neural Networks",
     description: "Explore the structure and function of neural networks",
+  },
+  {
+    id: 3,
+    title: "Statistics 101",
+    description: "Master fundamental statistical concepts for data analysis",
+  },
+  {
+    id: 4,
+    title: "Data Visualization",
+    description: "Learn techniques to present data in meaningful visual formats",
   }
 ];
 
@@ -80,6 +89,94 @@ export const learningContent = [
     progress: 0,
     moduleId: 2,
   },
+  
+  // Statistics 101 Module
+  {
+    id: 8,
+    title: "Introduction to Statistics",
+    description: "Learn the basic concepts of statistics and data analysis",
+    type: "video" as ContentType,
+    duration: "1:30",
+    progress: 0,
+    moduleId: 3,
+    videoType: "vertical",
+  },
+  {
+    id: 9,
+    title: "Mean, Median, and Mode",
+    description: "Understanding measures of central tendency in data sets",
+    type: "flashcard" as ContentType,
+    duration: "8 cards",
+    progress: 0,
+    moduleId: 3,
+  },
+  {
+    id: 10,
+    title: "Probability Distributions Quiz",
+    description: "Test your understanding of different probability distributions",
+    type: "quiz" as ContentType,
+    duration: "5 questions",
+    progress: 0,
+    moduleId: 3,
+  },
+  {
+    id: 11,
+    title: "Standard Deviation Explained",
+    description: "Visual explanation of standard deviation using mobile-friendly slides",
+    type: "video" as ContentType,
+    duration: "2:15",
+    progress: 0,
+    moduleId: 3,
+    videoType: "vertical",
+  },
+  {
+    id: 12,
+    title: "Chat with Statistics Expert",
+    description: "Ask questions about statistics concepts and applications",
+    type: "conversation" as ContentType,
+    duration: "Open-ended",
+    progress: 0,
+    moduleId: 3,
+  },
+  
+  // Data Visualization Module
+  {
+    id: 13,
+    title: "Chart Types Overview",
+    description: "Learn when to use different types of charts and graphs",
+    type: "video" as ContentType,
+    duration: "3:45",
+    progress: 0,
+    moduleId: 4,
+  },
+  {
+    id: 14,
+    title: "Data Storytelling Techniques",
+    description: "Mobile-first slides on crafting narratives with data",
+    type: "video" as ContentType,
+    duration: "1:50",
+    progress: 0,
+    moduleId: 4,
+    videoType: "vertical",
+  },
+  {
+    id: 15,
+    title: "Chart Selection Quiz",
+    description: "Test your knowledge on choosing the right chart for different data types",
+    type: "quiz" as ContentType,
+    duration: "8 questions",
+    progress: 0,
+    moduleId: 4,
+  },
+  {
+    id: 16,
+    title: "Color Theory in Data Visualization",
+    description: "Learn how to use colors effectively in your visualizations",
+    type: "flashcard" as ContentType,
+    duration: "10 cards",
+    progress: 0,
+    moduleId: 4,
+  }
 ];
 
 // Mock chat messages

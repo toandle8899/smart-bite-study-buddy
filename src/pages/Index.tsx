@@ -18,6 +18,7 @@ const Index = () => {
     title: string;
     description: string;
     type: string;
+    videoType?: "landscape" | "vertical";
   } | null>(null);
   
   const handleContentClick = (content: {
@@ -25,6 +26,7 @@ const Index = () => {
     title: string;
     description: string;
     type: string;
+    videoType?: "landscape" | "vertical";
   }) => {
     if (content.type === "video") {
       setSelectedContent(content);
@@ -89,7 +91,8 @@ const Index = () => {
                   id: String(content.id),
                   title: content.title,
                   description: content.description,
-                  type: content.type
+                  type: content.type,
+                  videoType: (content as any).videoType
                 })}
               />
             ))}
@@ -134,7 +137,8 @@ const Index = () => {
                               id: String(content.id),
                               title: content.title,
                               description: content.description,
-                              type: content.type
+                              type: content.type,
+                              videoType: (content as any).videoType
                             })}
                           />
                         ))}
@@ -153,6 +157,7 @@ const Index = () => {
             onClose={() => setSelectedContent(null)}
             title={selectedContent.title}
             description={selectedContent.description}
+            videoType={selectedContent.videoType}
           />
         )}
       </div>
