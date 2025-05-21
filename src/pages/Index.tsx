@@ -8,17 +8,33 @@ import { learningContent, learningModules, progressData } from "@/data/mockData"
 import { toast } from "@/hooks/use-toast";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import VideoPlayer from "@/components/ui/VideoPlayer";
 
 const Index = () => {
   const todayContent = learningContent.slice(0, 3);
   const [expandedModules, setExpandedModules] = useState<number[]>([1]);
+  const [selectedContent, setSelectedContent] = useState<{
+    id: string;
+    title: string;
+    description: string;
+    type: string;
+  } | null>(null);
   
-  const handleContentClick = (title: string) => {
-    toast({
-      title: "Content selected",
-      description: `You clicked on ${title}`,
-    });
-    console.log(`Clicked on ${title}`);
+  const handleContentClick = (content: {
+    id: string;
+    title: string;
+    description: string;
+    type: string;
+  }) => {
+    if (content.type === "video") {
+      setSelectedContent(content);
+    } else {
+      toast({
+        title: "Content selected",
+        description: `You clicked on ${content.title}`,
+      });
+    }
+    console.log(`Clicked on ${content.title}`);
   };
   
   const toggleModule = (moduleId: number) => {
@@ -69,7 +85,12 @@ const Index = () => {
                 type={content.type}
                 progress={content.progress}
                 duration={content.duration}
-                onClick={() => handleContentClick(content.title)}
+                onClick={() => handleContentClick({
+                  id: String(content.id),
+                  title: content.title,
+                  description: content.description,
+                  type: content.type
+                })}
               />
             ))}
           </div>
@@ -109,7 +130,12 @@ const Index = () => {
                             type={content.type}
                             progress={content.progress}
                             duration={content.duration}
-                            onClick={() => handleContentClick(content.title)}
+                            onClick={() => handleContentClick({
+                              id: String(content.id),
+                              title: content.title,
+                              description: content.description,
+                              type: content.type
+                            })}
                           />
                         ))}
                     </div>
@@ -119,6 +145,16 @@ const Index = () => {
             ))}
           </div>
         </div>
+
+        {/* Video player dialog */}
+        {selectedContent && (
+          <VideoPlayer
+            isOpen={!!selectedContent}
+            onClose={() => setSelectedContent(null)}
+            title={selectedContent.title}
+            description={selectedContent.description}
+          />
+        )}
       </div>
     </PageLayout>
   );
