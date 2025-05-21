@@ -1,14 +1,17 @@
 
-import React from "react";
+import React, { useState } from "react";
 import PageLayout from "@/components/layout/PageLayout";
 import ContentCard from "@/components/ui/ContentCard";
 import DailyStreak from "@/components/dashboard/DailyStreak";
 import TodayGoal from "@/components/dashboard/TodayGoal";
-import { learningContent, progressData } from "@/data/mockData";
+import { learningContent, learningModules, progressData } from "@/data/mockData";
 import { toast } from "@/hooks/use-toast";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 const Index = () => {
   const todayContent = learningContent.slice(0, 3);
+  const [expandedModules, setExpandedModules] = useState<number[]>([1]);
   
   const handleContentClick = (title: string) => {
     toast({
@@ -16,6 +19,14 @@ const Index = () => {
       description: `You clicked on ${title}`,
     });
     console.log(`Clicked on ${title}`);
+  };
+  
+  const toggleModule = (moduleId: number) => {
+    setExpandedModules(prev => 
+      prev.includes(moduleId)
+        ? prev.filter(id => id !== moduleId)
+        : [...prev, moduleId]
+    );
   };
   
   return (
@@ -64,23 +75,47 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Recommended for you */}
-        <div className="mt-2">
-          <div className="flex justify-between items-center mb-3">
-            <h3 className="font-semibold text-tutor-text">Recommended for You</h3>
-            <button className="text-sm text-tutor-primary">See all</button>
-          </div>
-          <div className="grid grid-cols-1 gap-3">
-            {learningContent.slice(3, 5).map((content) => (
-              <ContentCard
-                key={content.id}
-                id={String(content.id)}
-                title={content.title}
-                description={content.description}
-                type={content.type}
-                duration={content.duration}
-                onClick={() => handleContentClick(content.title)}
-              />
+        {/* Learning Modules */}
+        <div className="mt-4">
+          <h3 className="font-semibold text-tutor-text mb-3">Learning Modules</h3>
+          <div className="grid grid-cols-1 gap-4">
+            {learningModules.map((module) => (
+              <Card key={module.id} className="overflow-hidden">
+                <CardHeader 
+                  className="cursor-pointer bg-white hover:bg-gray-50 p-4"
+                  onClick={() => toggleModule(module.id)}
+                >
+                  <div className="flex justify-between items-center">
+                    <CardTitle className="text-lg font-semibold">{module.title}</CardTitle>
+                    {expandedModules.includes(module.id) ? 
+                      <ChevronUp size={20} /> : 
+                      <ChevronDown size={20} />
+                    }
+                  </div>
+                  <p className="text-sm text-gray-500 mt-1">{module.description}</p>
+                </CardHeader>
+                
+                {expandedModules.includes(module.id) && (
+                  <CardContent className="p-3">
+                    <div className="grid grid-cols-1 gap-3">
+                      {learningContent
+                        .filter(content => content.moduleId === module.id)
+                        .map(content => (
+                          <ContentCard
+                            key={content.id}
+                            id={String(content.id)}
+                            title={content.title}
+                            description={content.description}
+                            type={content.type}
+                            progress={content.progress}
+                            duration={content.duration}
+                            onClick={() => handleContentClick(content.title)}
+                          />
+                        ))}
+                    </div>
+                  </CardContent>
+                )}
+              </Card>
             ))}
           </div>
         </div>

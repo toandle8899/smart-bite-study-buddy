@@ -1,6 +1,20 @@
 
 import { ContentType } from "@/components/ui/ContentCard";
 
+// Mock learning modules
+export const learningModules = [
+  {
+    id: 1,
+    title: "Introduction to Machine Learning",
+    description: "Learn the fundamentals of machine learning concepts and applications",
+  },
+  {
+    id: 2,
+    title: "Neural Networks",
+    description: "Explore the structure and function of neural networks",
+  }
+];
+
 // Mock learning content
 export const learningContent = [
   {
@@ -10,6 +24,7 @@ export const learningContent = [
     type: "video" as ContentType,
     duration: "5:30",
     progress: 75,
+    moduleId: 1,
   },
   {
     id: 2,
@@ -18,6 +33,7 @@ export const learningContent = [
     type: "flashcard" as ContentType,
     duration: "10 cards",
     progress: 40,
+    moduleId: 1,
   },
   {
     id: 3,
@@ -26,6 +42,7 @@ export const learningContent = [
     type: "quiz" as ContentType,
     duration: "10 questions",
     progress: 0,
+    moduleId: 1,
   },
   {
     id: 4,
@@ -34,6 +51,7 @@ export const learningContent = [
     type: "conversation" as ContentType,
     duration: "Open-ended",
     progress: 0,
+    moduleId: 1,
   },
   {
     id: 5,
@@ -42,6 +60,25 @@ export const learningContent = [
     type: "video" as ContentType,
     duration: "4:15",
     progress: 0,
+    moduleId: 1,
+  },
+  {
+    id: 6,
+    title: "Neural Network Basics",
+    description: "Learn the fundamentals of neural network architecture",
+    type: "video" as ContentType,
+    duration: "6:45",
+    progress: 0,
+    moduleId: 2,
+  },
+  {
+    id: 7,
+    title: "Neural Network Flashcards",
+    description: "Test your knowledge with these neural network concept flashcards",
+    type: "flashcard" as ContentType,
+    duration: "12 cards",
+    progress: 0,
+    moduleId: 2,
   },
 ];
 
